@@ -13,9 +13,7 @@ class AddBank extends StatelessWidget {
           padding: const EdgeInsets.all(30.0),
           child: Column(
             children: <Widget>[
-              SizedBox(
-                height: MediaQuery.of(context).size.width / 50,
-              ),
+
               GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -35,7 +33,7 @@ class AddBank extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 5,),
+              SizedBox(height: 8,),
               Text(
                 "Add New Bank Account",
                 style: TextStyle(
@@ -85,7 +83,7 @@ class AddBank extends StatelessWidget {
                         "Select Country",
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: MediaQuery.of(context).size.height / 30,
+                            fontSize: MediaQuery.of(context).size.height / 35,
                             fontWeight: FontWeight.bold),
                       ),
                       IconButton(
@@ -128,7 +126,7 @@ class AddBank extends StatelessWidget {
                         "Select Bank",
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: MediaQuery.of(context).size.height / 30,
+                            fontSize: MediaQuery.of(context).size.height / 35,
                             fontWeight: FontWeight.bold),
                       ),
                       IconButton(
@@ -136,7 +134,19 @@ class AddBank extends StatelessWidget {
                             Icons.arrow_downward,
                             color: Colors.green,
                           ),
-                          onPressed: () {})
+                          onPressed: () {
+
+                            IconButton(
+                                icon: Icon(
+                                  Icons.arrow_downward,
+                                  color: Colors.green,
+                                ),
+                                onPressed: () {
+
+
+                                });
+
+                          })
                     ],
                   ),
                 ),
@@ -168,7 +178,7 @@ class AddBank extends StatelessWidget {
                       hintStyle: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
-                          fontSize: MediaQuery.of(context).size.height / 30),
+                          fontSize: MediaQuery.of(context).size.height / 35),
                       hintText: "Your Account Number",
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(8)))),
@@ -201,7 +211,7 @@ class AddBank extends StatelessWidget {
                       hintStyle: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
-                          fontSize: MediaQuery.of(context).size.height / 30),
+                          fontSize: MediaQuery.of(context).size.height / 35),
                       hintText: "Your Phone Number",
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(8)))),

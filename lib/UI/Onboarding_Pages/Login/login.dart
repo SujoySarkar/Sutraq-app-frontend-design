@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sutraq/UI/Onboarding_Pages/Login/forgotpassword.dart';
@@ -11,6 +12,30 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  String email;
+  String password;
+  final FirebaseAuth auth = FirebaseAuth.instance;
+
+
+
+  Future<FirebaseUser> handleSignInEmail(String email, String password) async {
+
+    AuthResult result = await auth.signInWithEmailAndPassword(email: email, password: password);
+    final FirebaseUser user = result.user;
+
+    assert(user != null);
+    assert(await user.getIdToken() != null);
+
+    final FirebaseUser currentUser = await auth.currentUser();
+    assert(user.uid == currentUser.uid);
+
+    print('signInEmail succeeded: $user');
+    Navigator.push(context, new MaterialPageRoute(builder: (context) => new Tipfive()));
+
+    return user;
+
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
@@ -62,10 +87,16 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(
                   height: 4,
                 ),
+                //email
                 Container(
                   height: MediaQuery.of(context).size.height / 12,
                   width: MediaQuery.of(context).size.height / 2,
                   child: TextField(
+                    onChanged: (value){
+                      setState(() {
+                        email=value;
+                      });
+                    },
                     keyboardType: TextInputType.text,
                     style: TextStyle(fontSize: MediaQuery.of(context).size.height / 30, fontWeight: FontWeight.bold),
                     decoration: InputDecoration(
@@ -76,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                         hintStyle: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
-                            fontSize: MediaQuery.of(context).size.height / 30),
+                            fontSize: MediaQuery.of(context).size.height / 35),
                         hintText: "presh@mail.com",
                         border: OutlineInputBorder(
                             borderRadius:
@@ -98,10 +129,16 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(
                   height: 4,
                 ),
+                //password
                 Container(
                   height: MediaQuery.of(context).size.height / 12,
                   width: MediaQuery.of(context).size.height / 2,
                   child: TextField(
+                    onChanged: (value){
+                      setState(() {
+                        password=value;
+                      });
+                    },
                     keyboardType: TextInputType.text,
                     style: TextStyle(
                         fontSize: MediaQuery.of(context).size.height / 30,
@@ -114,7 +151,7 @@ class _LoginPageState extends State<LoginPage> {
                         hintStyle: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
-                            fontSize: MediaQuery.of(context).size.height / 30),
+                            fontSize: MediaQuery.of(context).size.height / 35),
                         hintText: "***********",
                         border: OutlineInputBorder(
                             borderRadius:
@@ -144,6 +181,7 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 20,
                 ),
+                //ontap
                 Container(
                     height: MediaQuery.of(context).size.height / 12,
                     width: double.infinity,
@@ -155,10 +193,8 @@ class _LoginPageState extends State<LoginPage> {
                         color: Color(0xFF62BB46),
                         child: InkWell(
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Tipfive()));
+                            Center(child: CircularProgressIndicator());
+                          handleSignInEmail(email, password);
                           },
                           splashColor: Colors.red,
                           child: Center(

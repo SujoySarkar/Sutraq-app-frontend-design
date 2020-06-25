@@ -1,8 +1,25 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:sutraq/UI/Try_Sutraq/depositfundetwo.dart';
 import 'package:sutraq/UI/Try_Sutraq/goodjob.dart';
 
-class DepositFundOne extends StatelessWidget {
+class DepositFundOne extends StatefulWidget {
+  @override
+  _DepositFundOneState createState() => _DepositFundOneState();
+}
+
+class _DepositFundOneState extends State<DepositFundOne> {
+  TextEditingController depositamount = TextEditingController();
+  sendData()async{
+    final databaseReference = Firestore.instance;
+    await databaseReference.collection("UserData")
+        .document().collection("DepositAmount").document()
+        .setData({
+      'DepositAmount': depositamount.text,
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,6 +75,7 @@ class DepositFundOne extends StatelessWidget {
                 height: 5,
               ),
               TextField(
+                controller: depositamount,
                 keyboardType: TextInputType.number,
                 style: TextStyle(
                     fontSize: MediaQuery.of(context).size.height / 30,
@@ -76,7 +94,7 @@ class DepositFundOne extends StatelessWidget {
                     hintStyle: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
-                        fontSize: MediaQuery.of(context).size.height / 30),
+                        fontSize: MediaQuery.of(context).size.height / 35),
                     hintText: "Enter Amount",
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(8)))),
@@ -95,6 +113,9 @@ class DepositFundOne extends StatelessWidget {
                       color: Color(0xFF62BB46),
                       child: InkWell(
                         onTap: () {
+
+                          sendData();
+
                           Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -112,6 +133,7 @@ class DepositFundOne extends StatelessWidget {
                           ),
                         ),
                       ))),
+
             ],
           ),
         ),

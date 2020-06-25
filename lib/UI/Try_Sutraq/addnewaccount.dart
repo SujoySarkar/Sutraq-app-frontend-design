@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sutraq/UI/Try_Sutraq/goodjob.dart';
 
-class Addnewaccount extends StatelessWidget {
+class Addnewaccount extends StatefulWidget {
+  @override
+  _AddnewaccountState createState() => _AddnewaccountState();
+}
+
+class _AddnewaccountState extends State<Addnewaccount> {
+  var currency = "Choose Currency";
+
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
-          statusBarColor: Colors.transparent,
-          statusBarIconBrightness: Brightness.dark),
-    );
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(30.0),
@@ -66,17 +69,17 @@ class Addnewaccount extends StatelessWidget {
               height: MediaQuery.of(context).size.height / 12,
               width: MediaQuery.of(context).size.height / 2,
               decoration:
-                  BoxDecoration(border: Border.all(color: Color(0xFF969696))),
+              BoxDecoration(border: Border.all(color: Color(0xFF969696))),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text(
-                      "Choose Currency",
+                      currency,
                       style: TextStyle(
                           color: Colors.black,
-                          fontSize: MediaQuery.of(context).size.height / 28,
+                          fontSize: MediaQuery.of(context).size.height / 35,
                           fontWeight: FontWeight.bold),
                     ),
                     IconButton(
@@ -84,7 +87,35 @@ class Addnewaccount extends StatelessWidget {
                           Icons.arrow_downward,
                           color: Colors.green,
                         ),
-                        onPressed: () {})
+                        onPressed: () {
+                          DropdownButton(
+
+                            items: [
+                              DropdownMenuItem(
+                                value: "US Dollar",
+                                child: Text("US Dollar"),
+
+                              ),
+                              DropdownMenuItem(
+                                value: "UAE AED",
+                                child: Text("UAE AED"),
+
+                              ),
+                              DropdownMenuItem(
+                                value: "Naira NGN",
+                                child: Text("Naira NGN"),
+
+                              ),
+                            ],
+                            onChanged: (value) {
+
+                              setState(() {
+                                currency = value;
+                              });
+
+                            },);
+
+                        })
                   ],
                 ),
               ),
@@ -114,13 +145,17 @@ class Addnewaccount extends StatelessWidget {
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize:
-                                  MediaQuery.of(context).size.height / 30),
+                              MediaQuery.of(context).size.height / 30),
                         ),
                       ),
                     ))),
+
+
+
           ],
         ),
       ),
     );
   }
 }
+

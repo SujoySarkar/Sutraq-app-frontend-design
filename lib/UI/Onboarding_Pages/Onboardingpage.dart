@@ -25,78 +25,80 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: <Widget>[
-          SizedBox(
-            height: MediaQuery.of(context).size.height / 30,
-          ),
-          Container(
-            height: MediaQuery.of(context).size.height / 2.8,
-            width: double.infinity,
-            child: PageView(
-              controller: _controller,
-              onPageChanged: (currentindex) {
-                setState(() {
-                  _currentindex = currentindex;
-                });
-              },
-              children: <Widget>[
-                Container(
-                  child: Image.asset("images/onboardingone.png"),
-                ),
-                Container(
-                  child: Image.asset("images/onboardingtwo.png"),
-                ),
-                Container(
-                  child: Image.asset("images/onboardingthree.png"),
-                ),
-              ],
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          children: <Widget>[
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 30,
             ),
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height / 35,
-          ),
-          Container(
-            child: new DotsIndicator(
-              dotsCount: 3,
-              position: _currentindex == null
-                  ? initialpage.toDouble()
-                  : _currentindex.toDouble(),
+            Container(
+              height: MediaQuery.of(context).size.height / 2.8,
+              width: double.infinity,
+              child: PageView(
+                controller: _controller,
+                onPageChanged: (currentindex) {
+                  setState(() {
+                    _currentindex = currentindex;
+                  });
+                },
+                children: <Widget>[
+                  Container(
+                    child: Image.asset("images/onboardingone.png"),
+                  ),
+                  Container(
+                    child: Image.asset("images/onboardingtwo.png"),
+                  ),
+                  Container(
+                    child: Image.asset("images/onboardingthree.png"),
+                  ),
+                ],
+              ),
             ),
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height / 35,
-          ),
-          _currentindex == null
-              ? ReusableExpand(
-                  title: "Send Money Anywhere",
-                  description:
-                      "With our unique technology, you can get money anywhere in the world.",
-                )
-              : Center(),
-          _currentindex == 0
-              ? ReusableExpand(
-                  title: "Send Money Anywhere",
-                  description:
-                      "With our unique technology, you can get money anywhere in the world.",
-                )
-              : Center(),
-          _currentindex == 1
-              ? ReusableExpand(
-                  title: "Safe & Secured",
-                  description:
-                      "Safety of your funds is guaranteed. We’ve got you covered 24/7.",
-                )
-              : Center(),
-          _currentindex == 2
-              ? ReusableExpand(
-                  title: "Unbeatable Support",
-                  description:
-                      "Send money to other sutraq users free of charge, with no additional fee.",
-                )
-              : Center(),
-        ],
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 35,
+            ),
+            Container(
+              child: new DotsIndicator(
+                dotsCount: 3,
+                position: _currentindex == null
+                    ? initialpage.toDouble()
+                    : _currentindex.toDouble(),
+              ),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 35,
+            ),
+            _currentindex == null
+                ? ReusableExpand(
+                    title: "Send Money Anywhere",
+                    description:
+                        "With our unique technology, you can get money anywhere in the world.",
+                  )
+                : Center(),
+            _currentindex == 0
+                ? ReusableExpand(
+                    title: "Send Money Anywhere",
+                    description:
+                        "With our unique technology, you can get money anywhere in the world.",
+                  )
+                : Center(),
+            _currentindex == 1
+                ? ReusableExpand(
+                    title: "Safe & Secured",
+                    description:
+                        "Safety of your funds is guaranteed. We’ve got you covered 24/7.",
+                  )
+                : Center(),
+            _currentindex == 2
+                ? ReusableExpand(
+                    title: "Unbeatable Support",
+                    description:
+                        "Send money to other sutraq users free of charge, with no additional fee.",
+                  )
+                : Center(),
+          ],
+        ),
       ),
     );
   }
@@ -137,7 +139,7 @@ class ReusableExpand extends StatelessWidget {
                 height: MediaQuery.of(context).size.height / 20,
               ),
               Container(
-                  height: MediaQuery.of(context).size.height / 12,
+                  height: MediaQuery.of(context).size.height / 10,
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: Color(0xFF051F0E),
@@ -159,7 +161,8 @@ class ReusableExpand extends StatelessWidget {
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
-                                fontSize: MediaQuery.of(context).size.height / 30),
+                                fontSize:
+                                    MediaQuery.of(context).size.height / 30),
                           ),
                         ),
                       ))),

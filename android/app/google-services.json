@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "858865363069",
+    "firebase_url": "https://sutraq-8d8b5.firebaseio.com",
+    "project_id": "sutraq-8d8b5",
+    "storage_bucket": "sutraq-8d8b5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:858865363069:android:cd4e9eef9cf924f492e914",
+        "android_client_info": {
+          "package_name": "com.exampfjkdhufde.sutraq"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "858865363069-3dfhv41th7h97edee65mpvtp38uoodf5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.exampfjkdhufde.sutraq",
+            "certificate_hash": "3efa15a2ae134dc9a47cc83f9e625323fb0f7d20"
+          }
+        },
+        {
+          "client_id": "858865363069-4uq789it6togqv9fmh361s4926orblsm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATdgV4-96PxWr2rZWPa49MVx9TBZX3lzE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "858865363069-4uq789it6togqv9fmh361s4926orblsm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

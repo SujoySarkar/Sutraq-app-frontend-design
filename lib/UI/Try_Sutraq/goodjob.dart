@@ -19,7 +19,7 @@ class GoodJob extends StatelessWidget {
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>Addnewaccount()));
                 },
                 child: CircleAvatar(
-                  radius: 20,
+                  radius: MediaQuery.of(context).size.height / 30,
                   backgroundColor: Colors.green,
                   child: Icon(Icons.close,color: Colors.white,),
                 ),

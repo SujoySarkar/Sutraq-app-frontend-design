@@ -1,7 +1,29 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sutraq/UI/successpage/tipthree.dart';
 
-class SignUppage extends StatelessWidget {
+class SignUppage extends StatefulWidget {
+  @override
+  _SignUppageState createState() => _SignUppageState();
+}
+
+class _SignUppageState extends State<SignUppage> {
+  var email;
+  var password;
+
+  final FirebaseAuth auth = FirebaseAuth.instance;
+
+  Future<FirebaseUser> handleSignUp(email, password) async {
+    AuthResult result = await auth.createUserWithEmailAndPassword(
+        email: email, password: password);
+    final FirebaseUser user = result.user;
+
+    assert(user != null);
+    assert(await user.getIdToken() != null);
+
+    return user;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,11 +77,9 @@ class SignUppage extends StatelessWidget {
               Container(
                 height: MediaQuery.of(context).size.height / 12,
                 width: MediaQuery.of(context).size.height / 2,
-                decoration:
-                    BoxDecoration(
-                        border: Border.all(color: Color(0xFF969696)),
-                      borderRadius: BorderRadius.all(Radius.circular(10))
-                    ),
+                decoration: BoxDecoration(
+                    border: Border.all(color: Color(0xFF969696)),
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
@@ -75,7 +95,7 @@ class SignUppage extends StatelessWidget {
                         "Personal use",
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: MediaQuery.of(context).size.height / 29,
+                            fontSize: MediaQuery.of(context).size.height / 35,
                             fontWeight: FontWeight.bold),
                       ),
                       IconButton(
@@ -112,7 +132,7 @@ class SignUppage extends StatelessWidget {
                       hintStyle: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
-                          fontSize: MediaQuery.of(context).size.height / 30),
+                          fontSize: MediaQuery.of(context).size.height / 35),
                       hintText: "Umar",
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(8)))),
@@ -142,7 +162,7 @@ class SignUppage extends StatelessWidget {
                       hintStyle: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
-                          fontSize: MediaQuery.of(context).size.height / 30),
+                          fontSize: MediaQuery.of(context).size.height / 35),
                       hintText: "Murtala",
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(8)))),
@@ -160,10 +180,16 @@ class SignUppage extends StatelessWidget {
               SizedBox(
                 height: 4,
               ),
+              // email
               Container(
                 height: MediaQuery.of(context).size.height / 12,
                 width: MediaQuery.of(context).size.height / 2,
                 child: TextField(
+                  onChanged: (value) {
+                    setState(() {
+                      email = value;
+                    });
+                  },
                   keyboardType: TextInputType.text,
                   style: TextStyle(
                       fontSize: MediaQuery.of(context).size.height / 30,
@@ -176,7 +202,7 @@ class SignUppage extends StatelessWidget {
                       hintStyle: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
-                          fontSize: MediaQuery.of(context).size.height / 30),
+                          fontSize: MediaQuery.of(context).size.height / 35),
                       hintText: "presh@mail.com",
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(8)))),
@@ -194,10 +220,16 @@ class SignUppage extends StatelessWidget {
               SizedBox(
                 height: 4,
               ),
+              // password
               Container(
                 height: MediaQuery.of(context).size.height / 12,
                 width: MediaQuery.of(context).size.height / 2,
                 child: TextField(
+                  onChanged: (value) {
+                    setState(() {
+                      password = value;
+                    });
+                  },
                   keyboardType: TextInputType.text,
                   style: TextStyle(
                       fontSize: MediaQuery.of(context).size.height / 30,
@@ -210,7 +242,7 @@ class SignUppage extends StatelessWidget {
                       hintStyle: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
-                          fontSize: MediaQuery.of(context).size.height / 30),
+                          fontSize: MediaQuery.of(context).size.height / 35),
                       hintText: "***********",
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(8)))),
@@ -255,7 +287,7 @@ class SignUppage extends StatelessWidget {
                         "Nigeria",
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: MediaQuery.of(context).size.height / 27,
+                            fontSize: MediaQuery.of(context).size.height / 35,
                             fontWeight: FontWeight.bold),
                       ),
                       IconButton(
@@ -282,6 +314,7 @@ class SignUppage extends StatelessWidget {
                       color: Color(0xFF62BB46),
                       child: InkWell(
                         onTap: () {
+                          handleSignUp(email, password);
                           Navigator.push(
                               context,
                               MaterialPageRoute(
